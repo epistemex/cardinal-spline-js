@@ -1,6 +1,11 @@
 Change log for curve.js
 -----------------------
 
+2.3.2
+
+IMP: Minor speed improvement
+FIX: Doc stated default segements value was 20, corrected to 25.
+
 2.3.1
 
 FIX: Made the extension more "bullet-proof" in case other extensions should happen to have the same name.
@@ -43,5 +48,5 @@ CHG: Cleaned up var declarations
 CHG: Removed internal moveTo() to conform better to context behavior in general
 
 
-(c) Epistemex 2013-2014
+(c) Epistemex 2013-2016
 License: MIT

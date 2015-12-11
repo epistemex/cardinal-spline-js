@@ -12,13 +12,19 @@ Additional options are to provide a closed spline as well as segment resolution
 
 The archive comes with three separate versions for the sake of convenience:
 
-    curve.js      - Canvas 2D context extension. Call curve() on the context (ctx.curve(...))
-    curve_func.js - if you get sweaty palms with the idea of using extensions: this is a pure
-                    function that takes the context as an argument instead of extending it.
-    curve_calc.js - just the function that calculates the points. Does not draw anything.
+**curve.js**<br>
+Canvas 2D context extension. Call curve() on the context (ctx.curve(...))
+    
+**curve_func.js**<br>
+If your palms get with the thought of using extensions: this is a pure
+function that takes the context as an argument instead of extending it.
+
+**curve_calc.js**<br>
+Just the internal function that calculates the points. Does not draw anything.
 
 As well as their minified equivalent. There are no dependencies between these implementations.
 
+**Also see the included demo. (Updated with movable points).**
 
 Usage
 =====
@@ -98,6 +104,6 @@ License
 
 Released under [MIT license](http://choosealicense.com/licenses/mit/). You can use this class in both commercial and non-commercial projects provided that full header (minified and developer versions) is included.
 
-*&copy; 2013-2014 Epistemex*
+*&copy; 2013-2016 Epistemex*
 
 ![Epistemex](http://i.imgur.com/wZSsyt8.png)
