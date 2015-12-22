@@ -1,5 +1,5 @@
-/*!	Curve calc function for canvas 2.3.2
- *	(c) Epistemex 2013-2016
+/*!	Curve calc function for canvas 2.3.3
+ *	(c) Epistemex 2013-2015
  *	www.epistemex.com
  *	License: MIT
  */
@@ -113,3 +113,5 @@ function getCurvePoints(points, tension, numOfSeg, close) {
 
 	return res;
 }
+
+if (typeof exports !== "undefined") exports.getCurvePoints = getCurvePoints;

@@ -16,15 +16,28 @@ The archive comes with three separate versions for the sake of convenience:
 Canvas 2D context extension. Call curve() on the context (ctx.curve(...))
     
 **curve_func.js**<br>
-If your palms get with the thought of using extensions: this is a pure
-function that takes the context as an argument instead of extending it.
+If you get sweaty with the thought of using extensions: this is for you,
+a pure function that takes the context as an argument instead of 
+extending it.
 
 **curve_calc.js**<br>
-Just the internal function that calculates the points. Does not draw anything.
+Just the internal function that calculates the points. Does not draw
+anything.
 
-As well as their minified equivalent. There are no dependencies between these implementations.
+As well as their minified equivalent. There are no dependencies between 
+these implementations.
 
-**Also see the included demo. (Updated with movable points).**
+###[→ Live demo can be found here](https://epistemex.github.io/cardinal-spline-js/)
+
+Install
+=======
+
+- Bower: `bower install cardinal-spline-js`
+- Git using HTTPS: `git clone https://github.com/epistemex/cardinal-spline-js.git`
+- Git using SSH: `git clone git@github.com:epistemex/cardinal-spline-js.git`
+- NPM: `npm install -g cardinal-spline-js` (note: only curve_calc.js is directly supported)
+- Download [zip archive](https://github.com/epistemex/cardinal-spline-js/archive/master.zip) and extract.
+
 
 Usage
 =====
@@ -90,6 +103,14 @@ changed to better reflect its purpose):
 
 Context is not required with this function.
 
+From Node.js
+------------
+
+Require the package after installing it using npm, then:
+
+    var demo = require("cardinal-spline-js");
+    var outPts = demo.getCurvePoints(inPts);
+
 
 Requirements
 ============
@@ -104,6 +125,6 @@ License
 
 Released under [MIT license](http://choosealicense.com/licenses/mit/). You can use this class in both commercial and non-commercial projects provided that full header (minified and developer versions) is included.
 
-*&copy; 2013-2016 Epistemex*
+*&copy; 2013-2015 Epistemex*
 
 ![Epistemex](http://i.imgur.com/wZSsyt8.png)
