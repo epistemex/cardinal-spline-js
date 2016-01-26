@@ -1,6 +1,9 @@
 Change log for Cardinal Spline JS
 ---------------------------------
 
+2.3.4
+ADD: Node.js support for curve_func.js (added by @asmuelle)
+
 2.3.3
 ADD: Node.js support for curve_calc.js
 IMP: Minor speed improvement
