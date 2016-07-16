@@ -1,0 +1,15 @@
+{
+  "name": "cardinal-spline-js",
+  "description": "Smooth curves through points",
+  "main": "src/curve.js",
+  "keywords": [
+    "cardinal",
+    "spline",
+    "bezier"
+  ],
+  "authors": [
+    "Ken Nilsen (github@epistemex.com)"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/epistemex/cardinal-spline-js"
+}
