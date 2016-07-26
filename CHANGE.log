@@ -1,6 +1,12 @@
 Change log for Cardinal Spline JS
 ---------------------------------
 
+2.3.6
+ADD: Support empty point array as input (issue #5). Returns empty Float32Array.
+
+2.3.5
+ADD: Documentation only (# of points required). Patch touched for bower (new tag).
+
 2.3.4
 ADD: Node.js support for curve_func.js (added by @asmuelle)
 

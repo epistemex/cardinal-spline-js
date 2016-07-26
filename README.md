@@ -26,7 +26,10 @@ anything.
 As well as their minified equivalent. There are no dependencies between 
 these implementations.
 
-**[→ Live demo can be found here](https://epistemex.github.io/cardinal-spline-js/)**
+Demo
+====
+
+**[→ Interactive demo](https://epistemex.github.io/cardinal-spline-js/)**
 
 
 Install
@@ -109,8 +112,8 @@ In Node.js
 
 Require the package after installing it using npm, then:
 
-    var demo = require("cardinal-spline-js");
-    var outPts = demo.getCurvePoints(inPts);
+    var getCurvePoints = require("cardinal-spline-js").getCurvePoints;
+    var outPoints = getCurvePoints(inPoints);
 
 
 Requirements
@@ -123,8 +126,7 @@ a 2D context is required as well.
 Contributors
 ============
 
-- Ken Nilsen (@epistemex)
-- Andreas Müller (@asmuelle)
+See contributors [here](https://github.com/epistemex/cardinal-spline-js/graphs/contributors).
 
 
 License

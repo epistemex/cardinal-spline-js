@@ -144,12 +144,6 @@
 <script src="../curve.min.js"></script>
 <script>
 
-	/*
-	 Slider feedback 0.6
-	 By Ken Nilsen
-	 */
-	(function(){var a=HTMLInputElement.prototype;a._LD=function(){this._DW=!0};a._LU=function(){this._DW=!1};a._LM=function(b){var d=this,c=d.value;if(d._DW&&d._OV!=c){d._LE();d._OV=c;if(d.onchange){setTimeout(function(){d.onchange(d._CE())},7)}}};a._LE=function(){this.dispatchEvent(this._CE())};a._CE=function(){var d,b="change";try{d=new Event(b)}catch(f){d=document.createEvent("Event");d.initEvent(b,!0,!0)}return d};a.feedback=function(f){var j=this,e="mouse",c="down",h="up",i="move";if(j.type=="range"){if(f==j._OMD){return}if(f){b(e+c,j._LD);b(e+i,j._LM);b(e+h,j._LU);setTimeout(function(){j._LE();if(j.onchange){j.onchange(null)}},9)}else{g(e+c,j._LD);g(e+i,j._LM);g(e+h,j._LU)}j._OMD=f}function b(k,d){j.addEventListener(k,d)}function g(k,d){j.removeEventListener(k,d)}}})();window.addEventListener("DOMContentLoaded",function(){for(var c=document.querySelectorAll("input[type=range]"),b=0,a;a=c[b++];){a.feedback(!0)}});
-
 	var	canvas = document.getElementById('demoCanvas'),
 		ctx = canvas.getContext("2d"),
 		w = canvas.width, h,
@@ -174,11 +168,17 @@
 
 	window.onresize = setCanvas;
 
-	document.getElementById('numSegments').addEventListener('change', renderCurve, false);
-	document.getElementById('numTension').addEventListener('change', renderCurve, false);
-	document.getElementById('chkPoints').addEventListener('change', renderCurve, false);
-	document.getElementById('chkClosed').addEventListener('change', renderCurve, false);
-	document.getElementById('chkFill').addEventListener('change', renderCurve, false);
+	document.getElementById('numSegments').addEventListener('input', renderCurve);
+	document.getElementById('numTension').addEventListener('input', renderCurve);
+	document.getElementById('chkPoints').addEventListener('input', renderCurve);
+	document.getElementById('chkClosed').addEventListener('input', renderCurve);
+	document.getElementById('chkFill').addEventListener('input', renderCurve);
+
+	document.getElementById('numSegments').addEventListener('change', renderCurve);
+	document.getElementById('numTension').addEventListener('change', renderCurve);
+	document.getElementById('chkPoints').addEventListener('change', renderCurve);
+	document.getElementById('chkClosed').addEventListener('change', renderCurve);
+	document.getElementById('chkFill').addEventListener('change', renderCurve);
 
 	canvas.onmousedown = function(e) {
 		var pos = getPos(e),
@@ -265,23 +265,7 @@
 			ctx.fillStyle = '#ca7';
 			ctx.fill();
 		}
-		ctx.stroke();
-
-		// show original points
-		if (o.points) {
-			var l = pts.length - 2;
-			ctx.lineWidth = 1;
-
-			ctx.strokeStyle = '#0f0';
-			ctx.strokeRect(pts[0] - 3, pts[1] - 3, 6, 6);
-			ctx.strokeStyle = 'rgba(255,0,0,0.7)';
-			ctx.strokeRect(pts[l] - 3, pts[l+1] - 3, 6, 6);
-			ctx.strokeStyle = 'rgba(0,0,0,0.7)';
-
-			ctx.beginPath();
-			for(var i = 2; i < l; i += 2) ctx.rect(pts[i] - 3, pts[i+1] - 3, 6, 6);
-			ctx.stroke();
-		}
+		ctx.stroke()
 	}
 
 </script>
