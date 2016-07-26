@@ -1,4 +1,4 @@
-/*!	Curve calc function for canvas 2.3.4
+/*!	Curve calc function for canvas 2.3.6
  *	(c) Epistemex 2013-2016
  *	www.epistemex.com
  *	License: MIT
@@ -7,6 +7,9 @@
 /**
  * Calculates an array containing points representing a cardinal spline through given point array.
  * Points must be arranged as: [x1, y1, x2, y2, ..., xn, yn].
+ *
+ * There must be a minimum of two points in the input array but the function
+ * is only useful where there are three points or more.
  *
  * The points for the cardinal spline are returned as a new array.
  *
@@ -20,9 +23,11 @@ function getCurvePoints(points, tension, numOfSeg, close) {
 
 	'use strict';
 
+	if (typeof points === "undefined" || points.length < 2) return new Float32Array(0);
+
 	// options or defaults
-	tension = (typeof tension === 'number') ? tension : 0.5;
-	numOfSeg = (typeof numOfSeg === 'number') ? numOfSeg : 25;
+	tension = typeof tension === "number" ? tension : 0.5;
+	numOfSeg = typeof numOfSeg === "number" ? numOfSeg : 25;
 
 	var pts,															// for cloning point array
 		i = 1,
@@ -30,7 +35,7 @@ function getCurvePoints(points, tension, numOfSeg, close) {
 		rPos = 0,
 		rLen = (l-2) * numOfSeg + 2 + (close ? 2 * numOfSeg: 0),
 		res = new Float32Array(rLen),
-		cache = new Float32Array((numOfSeg + 2) * 4),
+		cache = new Float32Array((numOfSeg + 2) << 2),
 		cachePtr = 4;
 
 	pts = points.slice(0);
@@ -111,7 +116,7 @@ function getCurvePoints(points, tension, numOfSeg, close) {
 	res[rPos++] = points[l++];
 	res[rPos] = points[l];
 
-	return res;
+	return res
 }
 
 if (typeof exports !== "undefined") exports.getCurvePoints = getCurvePoints;
