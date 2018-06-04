@@ -1,12 +1,12 @@
 ﻿Cardinal spline
 ===============
 
-A Cardinal spline (basically a Catmull-Rom with a tension option) 
-implementation for  JavaScript/HTML5 which creates an interpolated 
-smooth curve through each point pair in the given array. There is no 
+A Cardinal spline (basically a Catmull-Rom with a tension option)
+implementation for  JavaScript/HTML5 which creates an interpolated
+smooth curve through each point pair in the given array. There is no
 need to specify control points.
 
-![Demo snapshot](http://i.imgur.com/5e69T5C.png)
+![Demo snapshot](https://i.imgur.com/5e69T5C.png)
 
 Additional options are to provide a closed spline as well as segment
 resolution (between each point) and of course a tension value.
@@ -15,16 +15,16 @@ The archive comes with three separate versions for the sake of convenience:
 
 **curve.js**<br>
 Canvas 2D context extension. Call curve() on the context (ctx.curve(...))
-    
+
 **curve_func.js**<br>
-If you prefer not to use an extension then this version provide a pure 
+If you prefer not to use an extension then this version provide a pure
 function that takes the context as an argument instead.
 
 **curve_calc.js**<br>
 Just the internal function that calculates the points. Does not draw
 anything.
 
-As well as their minified equivalent. There are no dependencies between 
+As well as their minified equivalent. There are no dependencies between
 these implementations.
 
 
@@ -80,8 +80,8 @@ tracking, calculate length and so forth. The values are in floating points:
 curve_func.js
 -------------
 
-If you use the function file instead the arguments will be the same as 
-above except that the context is passed in as the first argument and 
+If you use the function file instead the arguments will be the same as
+above except that the context is passed in as the first argument and
 then the function is instead called as:
 
     ctx.moveTo(points[0], points[1]);  // optionally move to first point
@@ -94,8 +94,8 @@ Also this variant returns a spline point array.
 curve_calc.js
 -------------
 
-If you just want to calculate the spline points without drawing anything, 
-you can use the `curve_calc.js` file and call (please observe that the 
+If you just want to calculate the spline points without drawing anything,
+you can use the `curve_calc.js` file and call (please observe that the
 name has been changed to better reflect its purpose):
 
     var splinePoints = getCurvePoints(points, ...);
@@ -127,4 +127,4 @@ Released under [MIT license](http://choosealicense.com/licenses/mit/). You can u
 
 *&copy; 2013-2017 Epistemex*
 
-![Epistemex](http://i.imgur.com/wZSsyt8.png)
+![Epistemex](https://i.imgur.com/wZSsyt8.png)

@@ -87,15 +87,15 @@ function getCurvePoints(points, tension, numOfSeg, close) {
 
 		for (var i = 2, t; i < l; i += 2) {
 
-			var pt1 = pts[i],
-				pt2 = pts[i+1],
-				pt3 = pts[i+2],
-				pt4 = pts[i+3],
+			var pt1 = pts[i],     // x1
+				pt2 = pts[i+1],   // y1
+				pt3 = pts[i+2],   // x2
+				pt4 = pts[i+3],   // y2
 
-				t1x = (pt3 - pts[i-2]) * tension,
-				t1y = (pt4 - pts[i-1]) * tension,
-				t2x = (pts[i+4] - pt1) * tension,
-				t2y = (pts[i+5] - pt2) * tension,
+				t1x = (pt3 - pts[i-2]) * tension,  // x2-x0
+				t1y = (pt4 - pts[i-1]) * tension,  // y2-y0
+				t2x = (pts[i+4] - pt1) * tension,  // x3-x1
+				t2y = (pts[i+5] - pt2) * tension,  // y3-y1
 				c = 0, c1, c2, c3, c4;
 
 			for (t = 0; t < numOfSeg; t++) {
