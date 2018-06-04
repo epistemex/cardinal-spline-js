@@ -1,5 +1,5 @@
 /*!	Curve extension for canvas 2.3.7
- *	(c) Epistemex 2013-2017
+ *	(c) Epistemex 2013-2018
  *	www.epistemex.com
  *	License: MIT
  */
