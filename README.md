@@ -32,10 +32,10 @@ these implementations.
 Install
 =======
 
-- Bower: `bower install cardinal-spline-js`
 - Git using HTTPS: `git clone https://gitlab.com/epistemex/cardinal-spline-js.git`
 - Git using SSH: `git clone git@gitlab.com:epistemex/cardinal-spline-js.git`
-- NPM: `npm install -g cardinal-spline-js` (curve_calc.js / curve_func.js)
+- Bower: `bower install cardinal-spline-js`
+- NPM: `npm install cardinal-spline-js` (curve_calc.js / curve_func.js)
 
 
 Usage
