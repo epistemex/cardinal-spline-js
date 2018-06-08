@@ -1,6 +1,6 @@
 {
   "name": "cardinal-spline-js",
-  "version": "2.3.7",
+  "version": "2.3.8",
   "description": "Smooth curve through points with tension and resolution options.",
   "main": "curve_calc.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "catmull",
     "rom"
   ],
-  "author": "epistemex <github@epistemex.com>",
+  "author": "epistemex <npm@epistemex.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://gitlab.com/epistemex/cardinal-spline-js/issues"

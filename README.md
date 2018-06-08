@@ -34,7 +34,6 @@ Install
 
 - Git using HTTPS: `git clone https://gitlab.com/epistemex/cardinal-spline-js.git`
 - Git using SSH: `git clone git@gitlab.com:epistemex/cardinal-spline-js.git`
-- Bower: `bower install cardinal-spline-js`
 - NPM: `npm install cardinal-spline-js` (curve_calc.js / curve_func.js)
 
 
@@ -123,7 +122,7 @@ a 2D context is required as well.
 License
 =======
 
-Released under [MIT license](http://choosealicense.com/licenses/mit/). You can use this class in both commercial and non-commercial projects provided that full header (minified and developer versions) is included.
+Released under [MIT license](http://choosealicense.com/licenses/mit/).
 
 *&copy; 2013-2018 Epistemex*
 
