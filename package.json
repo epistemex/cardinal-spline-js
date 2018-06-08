@@ -18,6 +18,18 @@
   ],
   "author": "epistemex <npm@epistemex.com>",
   "license": "MIT",
+  "files": [
+    "src/",
+    "demos/",
+    "docs/",
+    "package.json",
+    "README.md",
+    "curve.min.js",
+    "curve_calc.min.js",
+    "curve_func.min.js",
+    "MIT-LICENSE.md",
+    "CHANGE.log"
+  ],
   "bugs": {
     "url": "https://gitlab.com/epistemex/cardinal-spline-js/issues"
   },
