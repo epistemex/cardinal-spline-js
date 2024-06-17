@@ -75,7 +75,7 @@ tracking, calculate length and so forth. The values are in floating points:
     var splinePoints = ctx.curve(points);
 
 
-curve_func.js
+curve_draw.js
 -------------
 
 If you use the function file instead the arguments will be the same as
