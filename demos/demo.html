@@ -4,8 +4,8 @@
 <!-- *******************************************************************
 	 **	    Cardinal spline for canvas extension demo.
 	 **
-	 **	    (c) Epistemex (www.epistemex.com).
-	 ** 	License: MIT. May be used in any project.
+	 **	    (c) Epistemex
+	 ** 	License: MIT.
 	 *******************************************************************
 -->
 
@@ -14,88 +14,104 @@
 
 	<style>
 		body {
-			width:100%;
-			padding:0;
-			margin:0;
-			font:14px sans-serif;
-			color:#ccd;
-			background-color:#272727;
+			width            : 100%;
+			padding          : 0;
+			margin           : 0;
+			font             : 14px sans-serif;
+			color            : #ccd;
+			background-color : #272727;
 			}
+
 		h1 {
-			font-size:32px;
-			font-weight: normal;
-			margin:20px 0;
-			color:#fff;
+			font-size   : 32px;
+			font-weight : normal;
+			margin      : 20px 0;
+			color       : #fff;
 			}
+
 		p {
-			line-height: 19px;
+			line-height : 19px;
 			}
+
 		#container {
-			width:1024px;
-			margin:0 auto;
+			width  : 1024px;
+			margin : 0 auto;
 			}
+
 		#demoCanvas {
-			background-color: #b7b7bb;
-			margin-bottom:12px;
-			cursor: crosshair;
+			background-color : #b7b7bb;
+			margin-bottom    : 12px;
+			cursor           : crosshair;
 			}
+
 		.options {
-			font-size:12px;
-			padding:9px 5px 9px 5px;
-			background-color:#555;
-			color:#fff;
-			width:1014px;
-			margin:0;
+			font-size        : 12px;
+			padding          : 9px 5px 9px 5px;
+			background-color : #555;
+			color            : #fff;
+			width            : 1014px;
+			margin           : 0;
 			}
-		.options>input[type=text] {
-			width:30px;
-			margin-left:5px;
-			text-align:center;
-			border:1px solid #fff;
+
+		.options > input[type=text] {
+			width       : 30px;
+			margin-left : 5px;
+			text-align  : center;
+			border      : 1px solid #fff;
 			}
-		.options>input[type=range] {
-			width:120px;
+
+		.options > input[type=range] {
+			width : 120px;
 			}
-		.options>span {
-			color:#ff7;
-			display:inline-block;
-			width:30px;
-			text-align: right;
+
+		.options > span {
+			color      : #ff7;
+			display    : inline-block;
+			width      : 30px;
+			text-align : right;
 			}
+
 		button {
-			border:0;
-			background:#888;
-			border-radius:2px;
-			font-weight:bold;
-			color:#fff;
-			padding:3px 9px;
-			float:right;
-			margin:-3px 3px 0 0;
+			border        : 0;
+			background    : #888;
+			border-radius : 2px;
+			font-weight   : bold;
+			color         : #fff;
+			padding       : 3px 9px;
+			float         : right;
+			margin        : -3px 3px 0 0;
 			}
+
 		button:hover {
-			background:#ca2;
+			background : #ca2;
 			}
-		.options>label {
-			margin-left:12px;
+
+		.options > label {
+			margin-left : 12px;
 			}
+
 		input {
-			height: 9px;
-			vertical-align: middle;
+			height         : 9px;
+			vertical-align : middle;
 			}
+
 		a {
-			color:#fff;
-			text-decoration: none;
+			color           : #fff;
+			text-decoration : none;
 			}
+
 		a:hover {
-			color:#ffa;
-			text-decoration: underline;
+			color           : #ffa;
+			text-decoration : underline;
 			}
+
 		.footerl {
-			float:left;
+			float : left;
 			}
+
 		.footerr {
-			float:right;
-			margin-top:-7px;
+			float      : right;
+			margin-top : -7px;
 			}
 	</style>
 </head>
@@ -115,7 +131,7 @@
 			<span id="numTensionValue">0.5</span>
 
 			<label for="numSegments">Segments:</label>
-			<input id="numSegments" type="range" value="25" min=1 max=100 />
+			<input id="numSegments" type="range" value="25" min=1 max=100/>
 			<span id="numSegmentsValue">25</span>
 
 			<label for="chkClosed">Closed:</label>
@@ -141,21 +157,21 @@
 		</div>
 	</div>
 
-<script src="../curve.min.js"></script>
+<script src="../src/curve.js"></script>
 <script>
 
-	var	canvas = document.getElementById('demoCanvas'),
-		ctx = canvas.getContext("2d"),
-		w = canvas.width, h,
-		isDown = false, pIndex = -1,
-		pts = [];
+	const canvas = document.getElementById('demoCanvas');
+	const ctx = canvas.getContext("2d");
+	let w = canvas.width, h;
+	let isDown = false, pIndex = -1;
+	const pts = [];
 
 	setCanvas();
 
 	function setCanvas() {
-		var ih = window.innerHeight,
-		    r = canvas.getBoundingClientRect(),
-		    nh = Math.max(100, ih - r.top * 1.5);
+		const ih = window.innerHeight;
+		const r = canvas.getBoundingClientRect();
+		const nh = Math.max(100, ih - r.top * 1.5);
 
 		canvas.height = h = nh;
 
@@ -181,16 +197,16 @@
 	document.getElementById('chkFill').addEventListener('change', renderCurve);
 
 	canvas.onmousedown = function(e) {
-		var pos = getPos(e),
-		    i = 0,
-		    m = 5;
+		const pos = getPos(e);
+		let i = 0;
+		let m = 5;
 
 		pIndex = -1;
 		isDown = false;
 
 		for(; i < pts.length; i += 2) {
 			if (pos.x >= pts[i] - m && pos.x < pts[i] + m &&
-				pos.y >= pts[i+1] - m && pos.y < pts[i+1] + m) {
+				pos.y >= pts[i + 1] - m && pos.y < pts[i + 1] + m) {
 				isDown = true;
 				pIndex = i;
 			}
@@ -199,9 +215,9 @@
 
 	window.onmousemove = function(e) {
 		if (isDown) {
-			var pos = getPos(e);
+			const pos = getPos(e);
 			pts[pIndex] = pos.x;
-			pts[pIndex+1] = pos.y;
+			pts[pIndex + 1] = pos.y;
 			renderCurve()
 		}
 	};
@@ -219,14 +235,12 @@
 	 *	Randomize points
 	*/
 	function randomize() {
+		const numOfPoints = 7; //min. 2
+		pts.length = 0;
 
-		var numOfPoints = 7; //min. 2
-
-		pts = [];
-
-		for(var i = 0; i < numOfPoints; i++) {
-			pts.push((w * Math.random() * 0.9 + w * 0.05)|0,
-					 (h * Math.random() * 0.9 + h * 0.05)|0);
+		for(let i = 0; i < numOfPoints; i++) {
+			pts.push((w * Math.random() * 0.9 + w * 0.05) | 0,
+				(h * Math.random() * 0.9 + h * 0.05) | 0);
 		}
 	}
 
@@ -245,11 +259,10 @@
 	 *	Draw curve with current settings and points
 	 */
 	function renderCurve() {
-
 		ctx.clearRect(0, 0, w, h);
 
 		// get current options
-		var o = new CurveOptions();
+		const o = new CurveOptions();
 
 		document.getElementById('numSegmentsValue').innerHTML = o.segments;
 		document.getElementById('numTensionValue').innerHTML = o.tension.toFixed(1);
@@ -265,7 +278,17 @@
 			ctx.fillStyle = '#ca7';
 			ctx.fill();
 		}
-		ctx.stroke()
+		ctx.stroke();
+
+		if (o.points) {
+			ctx.beginPath();
+			ctx.strokeStyle = '#aa0011';
+			for(let i = 0; i < pts.length; i+=2) {
+				ctx.rect(pts[i]-2,pts[i+1]-2,4,4);
+			}
+			ctx.stroke();
+
+		}
 	}
 
 </script>
