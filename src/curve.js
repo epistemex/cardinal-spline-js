@@ -1,4 +1,4 @@
-/*!	Curve patch for canvas 2D drawing context 3.0.0
+/*!	Curve patch for canvas 2D drawing context 3.0.1
  *	(c) Epistemex 2013-2018, 2024
  *	License: MIT
  */
