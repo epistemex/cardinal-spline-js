@@ -2,7 +2,7 @@
 ===============
 
 A Cardinal spline (basically a Catmull-Rom with a tension option)
-implementation for  JavaScript/HTML5 which creates an interpolated
+implementation for JavaScript which creates an interpolated
 smooth curve through each point pair in the given array. There is no
 need to specify control points.
 
@@ -16,8 +16,8 @@ The archive comes with three separate versions for the sake of convenience:
 **curve.js**<br>
 Canvas 2D context extension. Call curve() on the context (ctx.curve(...))
 
-**curve_func.js**<br>
-If you prefer not to use an extension then this version provide a pure
+**curve_draw.js**<br>
+If you prefer not to use an extension then this version provides a clean
 function that takes the context as an argument instead.
 
 **curve_calc.js**<br>
@@ -28,13 +28,12 @@ As well as their minified equivalent. There are no dependencies between
 these implementations.
 
 
-
 Install
 =======
 
-- Git using HTTPS: `git clone https://gitlab.com/epistemex/cardinal-spline-js.git`
-- Git using SSH: `git clone git@gitlab.com:epistemex/cardinal-spline-js.git`
-- NPM: `npm install cardinal-spline-js` (curve_calc.js / curve_func.js)
+- Git using HTTPS: `git clone https://github.com/epistemex/cardinal-spline-js.git`
+- Git using SSH: `git clone git@github.com:epistemex/cardinal-spline-js.git`
+- NPM: `npm install /downloads/cardinal-spline-js/` (curve_calc.js / curve_func.js)
 
 
 Usage
@@ -87,7 +86,7 @@ then the function is instead called as:
     curve(ctx, points);                // add cardinal spline to path
     ctx.stroke();                      // stroke path
 
-Also this variant returns a spline point array.
+Tip: This variant also returns a spline point array.
 
 
 curve_calc.js
@@ -107,9 +106,13 @@ In Node.js
 
 Require the package after installing it using npm, then:
 
-    var getCurvePoints = require("cardinal-spline-js").getCurvePoints;
-    var outPoints = getCurvePoints(inPoints);
+    const getCurvePoints = require("cardinal-spline-js").getCurvePoints;
+    const outPoints = getCurvePoints(inPoints);
 
+or using ES5 module:
+
+    import { getCurvePoints } from './path/to/curve_calc.js'
+    const outPoints = getCurvePoints(inPoints);
 
 Requirements
 ============
@@ -124,6 +127,6 @@ License
 
 Released under [MIT license](http://choosealicense.com/licenses/mit/).
 
-*&copy; 2013-2018 Epistemex*
+*&copy; 2013-2018, 2024 Epistemex*
 
 ![Epistemex](https://i.imgur.com/wZSsyt8.png)
