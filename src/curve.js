@@ -127,5 +127,5 @@ CanvasRenderingContext2D.prototype.curve = CanvasRenderingContext2D.prototype.cu
 	for(i = 0, l = result.length; i < l; i += 2)
 		this.lineTo(result[i], result[i+1]);
 
-	return res
+	return result
 };
