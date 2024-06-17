@@ -1,4 +1,4 @@
-/*!	Curve calc function for canvas 3.0.0
+/*!	Curve calc function for canvas 3.0.1
  *	(c) Epistemex 2013-2018, 2024
  *	License: MIT
  */
@@ -17,108 +17,112 @@
  * @param {Array} points - point array
  * @param {Number} [tension=0.5] - tension. Typically between [0.0, 1.0] but can be exceeded
  * @param {Number} [numOfSeg=25] - number of segments between two points (line resolution)
- * @param {Boolean} [close=false] - Close the ends making the line continuous
+ * @param {Boolean} [closed=false] - Close the ends making the line continuous
  * @returns {Float32Array} New array with the calculated points that was added to the path
  */
-function getCurvePoints(points, tension, numOfSeg, close) {
+function getCurvePoints(points, tension, numOfSeg, closed) {
 
-    if (typeof points === "undefined" || points.length < 2) {
-        return new Float32Array(0);
-    }
+	if (typeof points === "undefined" || points.length < 2) {
+		return new Float32Array(0);
+	}
 
-    // options or defaults
-    tension = typeof tension === "number" ? tension : 0.5;
-    numOfSeg = typeof numOfSeg === "number" ? numOfSeg : 25;
+	// options or defaults
+	tension = typeof tension === "number" ? tension : 0.5;
+	numOfSeg = (typeof numOfSeg === "number" ? numOfSeg : 25) | 0;
 
-    let pts;															// for cloning point array
-    let i = 1;
-    let l = points.length;
-    let rPos = 0;
-    let cachePtr = 4;
+	if (numOfSeg < 1) {
+		throw new Error('Number of segments cannot be less than one.');
+	}
 
-    const rLen = (l - 2) * numOfSeg + 2 + (close ? 2 * numOfSeg : 0);
-    const res = new Float32Array(rLen);
-    const cache = new Float32Array((numOfSeg + 2) << 2);
+	let ptsClone;                                                       // for cloning point array
+	let i = 1;
+	let l = points.length;
+	let resPos = 0;
+	let cachePtr = 4;
 
-    pts = points.slice(0);
+	const resLength = (l - 2) * numOfSeg + 2 + (closed ? 2 * numOfSeg : 0);
+	const result = new Float32Array(resLength);
+	const cache = new Float32Array((numOfSeg + 2) << 2);
 
-    if (close) {
-        pts.unshift(points[l - 1]);										// insert end point as first point
-        pts.unshift(points[l - 2]);
-        pts.push(points[0], points[1]); 								// first point as last point
-    }
-    else {
-        pts.unshift(points[1]);											// copy 1. point and insert at beginning
-        pts.unshift(points[0]);
-        pts.push(points[l - 2], points[l - 1]);							// duplicate end-points
-    }
+	ptsClone = points.slice(0);
 
-    // cache inner-loop calculations as they are based on t alone
-    cache[0] = 1;														// 1,0,0,0
+	if (closed) {
+		ptsClone.unshift(points[l - 1]);                                // insert end point as first point
+		ptsClone.unshift(points[l - 2]);
+		ptsClone.push(points[0], points[1]);                            // first point as last point
+	}
+	else {
+		ptsClone.unshift(points[1]);                                    // copy 1. point and insert at beginning
+		ptsClone.unshift(points[0]);
+		ptsClone.push(points[l - 2], points[l - 1]);                    // duplicate end-points
+	}
 
-    for(; i < numOfSeg; i++) {
-        const st = i / numOfSeg;
-        const st2 = st * st;
-        const st3 = st2 * st;
-        const st23 = st3 * 2;
-        const st32 = st2 * 3;
+	// cache inner-loop calculations as they are based on t alone
+	cache[0] = 1;                                                       // 1,0,0,0
 
-        cache[cachePtr++] = st23 - st32 + 1;							// c1
-        cache[cachePtr++] = st32 - st23;								// c2
-        cache[cachePtr++] = st3 - 2 * st2 + st;							// c3
-        cache[cachePtr++] = st3 - st2;									// c4
-    }
+	for(; i < numOfSeg; i++) {
+		const st = i / numOfSeg;
+		const st2 = st * st;
+		const st3 = st2 * st;
+		const st23 = st3 * 2;
+		const st32 = st2 * 3;
 
-    cache[++cachePtr] = 1;												// 0,1,0,0
+		cache[cachePtr++] = st23 - st32 + 1;                            // c1
+		cache[cachePtr++] = st32 - st23;                                // c2
+		cache[cachePtr++] = st3 - 2 * st2 + st;                         // c3
+		cache[cachePtr++] = st3 - st2;                                  // c4
+	}
 
-    // calc. points
-    parse(pts, cache, l, tension);
+	cache[++cachePtr] = 1;                                              // 0,1,0,0
 
-    if (close) {
-        //l = points.length;
-        pts = [];
-        pts.push(points[l - 4], points[l - 3],
-            points[l - 2], points[l - 1], 								// second last and last
-            points[0], points[1],
-            points[2], points[3]); 										// first and second
-        parse(pts, cache, 4, tension);
-    }
+	// calc. points
 
-    function parse(pts, cache, l, tension) {
+	fill(ptsClone, cache, l, tension);
 
-        for(let i = 2; i < l; i += 2) {
-            const pt1 = pts[i];       // x1
-            const pt2 = pts[i + 1];   // y1
-            const pt3 = pts[i + 2];   // x2
-            const pt4 = pts[i + 3];   // y2
+	if (closed) {
+		//l = points.length;
+		ptsClone = [];
+		ptsClone.push(points[l - 4], points[l - 3],
+			points[l - 2], points[l - 1],                               // second last and last
+			points[0], points[1],
+			points[2], points[3]);                                      // first and second
+		fill(ptsClone, cache, 4, tension);
+	}
 
-            const t1x = (pt3 - pts[i - 2]) * tension;  // x2-x0
-            const t1y = (pt4 - pts[i - 1]) * tension;  // y2-y0
-            const t2x = (pts[i + 4] - pt1) * tension;  // x3-x1
-            const t2y = (pts[i + 5] - pt2) * tension;  // y3-y1
-            let c = 0, c1, c2, c3, c4;
+	function fill(pts, cache, l, tension) {
+		for(let i = 2; i < l; i += 2) {
+			const pt1 = pts[i];                                         // x1
+			const pt2 = pts[i + 1];                                     // y1
+			const pt3 = pts[i + 2];                                     // x2
+			const pt4 = pts[i + 3];                                     // y2
 
-            for(let t = 0; t < numOfSeg; t++) {
-                c1 = cache[c++];
-                c2 = cache[c++];
-                c3 = cache[c++];
-                c4 = cache[c++];
+			const t1x = (pt3 - pts[i - 2]) * tension;                   // x2-x0
+			const t1y = (pt4 - pts[i - 1]) * tension;                   // y2-y0
+			const t2x = (pts[i + 4] - pt1) * tension;                   // x3-x1
+			const t2y = (pts[i + 5] - pt2) * tension;                   // y3-y1
+			let c = 0, c1, c2, c3, c4;
 
-                res[rPos++] = c1 * pt1 + c2 * pt3 + c3 * t1x + c4 * t2x;
-                res[rPos++] = c1 * pt2 + c2 * pt4 + c3 * t1y + c4 * t2y;
-            }
-        }
-    }
+			for(let t = 0; t < numOfSeg; t++) {
+				c1 = cache[c++];
+				c2 = cache[c++];
+				c3 = cache[c++];
+				c4 = cache[c++];
 
-    // add last point
-    l = close ? 0 : points.length - 2;
-    res[rPos++] = points[l++];
-    res[rPos] = points[l];
+				result[resPos++] = c1 * pt1 + c2 * pt3 + c3 * t1x + c4 * t2x;
+				result[resPos++] = c1 * pt2 + c2 * pt4 + c3 * t1y + c4 * t2y;
+			}
+		}
+	}
 
-    return res
+	// append last point
+	l = closed ? 0 : points.length - 2;
+	result[resPos++] = points[l++];
+	result[resPos] = points[l];
+
+	return result
 }
 
 // node support
 if (typeof exports !== "undefined") {
-    module.exports.getCurvePoints = getCurvePoints;
+	module.exports.getCurvePoints = getCurvePoints;
 }
