@@ -11,6 +11,10 @@ need to specify control points.
 Additional options are to provide a closed spline as well as segment
 resolution (between each point) and of course a tension value.
 
+_Help keep the project alive by supporting the developer:_
+
+[![PayPalMe](https://github.com/epistemex/transformation-matrix-js/assets/70324091/04203267-58f0-402b-9589-e2dee6e7c510)](https://paypal.me/KenNil)
+
 The archive comes with three separate versions for the sake of convenience:
 
 **curve.js**<br>
